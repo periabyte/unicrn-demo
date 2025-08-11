@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import './src/lib/unistyles';
-import { Typography, Button, Input, Card } from './src/components';
+import { Typography, Button, Input, Card } from '../components/ui';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -66,15 +65,15 @@ export default function LoginScreen() {
         >
           <View style={styles.content}>
             <View style={styles.header}>
-              <Typography variant="h1" color="text">
+              <Typography variant="h1" color="foreground">
                 Welcome Back
               </Typography>
-              <Typography variant="body" color="textSecondary" style={styles.subtitle}>
+              <Typography variant="p" color="muted" style={styles.subtitle}>
                 Sign in to your account to continue
               </Typography>
             </View>
 
-            <Card variant="elevated" padding="lg">
+            <Card padding="lg">
               <View style={styles.form}>
                 <Input
                   label="Email Address"
@@ -82,8 +81,6 @@ export default function LoginScreen() {
                   value={email}
                   onChangeText={setEmail}
                   error={emailError}
-                  type="email"
-                  autoComplete="email"
                 />
 
                 <Input
@@ -92,25 +89,20 @@ export default function LoginScreen() {
                   value={password}
                   onChangeText={setPassword}
                   error={passwordError}
-                  type="password"
-                  autoComplete="password"
+                  secureTextEntry={true}
                 />
 
                 <Button
-                  variant="primary"
-                  size="lg"
+                  title={loading ? 'Signing In...' : 'Sign In'}
                   onPress={handleLogin}
                   loading={loading}
-                  style={styles.loginButton}
-                >
-                  {loading ? 'Signing In...' : 'Sign In'}
-                </Button>
+                />
 
                 <View style={styles.footer}>
-                  <Typography variant="body" color="textSecondary">
+                  <Typography variant="p" color="muted">
                     Don't have an account?{' '}
                   </Typography>
-                  <Typography variant="body" color="primary">
+                  <Typography variant="p" color="primary">
                     Sign up here
                   </Typography>
                 </View>
@@ -151,9 +143,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: 16,
-  },
-  loginButton: {
-    marginTop: 16,
   },
   footer: {
     flexDirection: 'row',

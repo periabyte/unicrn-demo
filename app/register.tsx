@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import './src/lib/unistyles';
-import { Typography, Button, Input, Card } from './src/components';
+import { Typography, Button, Input, Card } from '../components/ui';
 
 export default function RegisterScreen() {
   const [firstName, setFirstName] = useState('');
@@ -84,15 +83,15 @@ export default function RegisterScreen() {
         >
           <View style={styles.content}>
             <View style={styles.header}>
-              <Typography variant="h1" color="text">
+              <Typography variant="h1" color="foreground">
                 Create Account
               </Typography>
-              <Typography variant="body" color="textSecondary" style={styles.subtitle}>
+              <Typography variant="p" color="muted" style={styles.subtitle}>
                 Join us today and get started
               </Typography>
             </View>
 
-            <Card variant="elevated" padding="lg">
+            <Card padding="lg">
               <View style={styles.form}>
                 <View style={styles.nameRow}>
                   <Input
@@ -119,8 +118,6 @@ export default function RegisterScreen() {
                   value={email}
                   onChangeText={setEmail}
                   error={errors.email}
-                  type="email"
-                  autoComplete="email"
                 />
 
                 <Input
@@ -129,8 +126,7 @@ export default function RegisterScreen() {
                   value={password}
                   onChangeText={setPassword}
                   error={errors.password}
-                  type="password"
-                  autoComplete="new-password"
+                  secureTextEntry={true}
                 />
 
                 <Input
@@ -139,25 +135,20 @@ export default function RegisterScreen() {
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   error={errors.confirmPassword}
-                  type="password"
-                  autoComplete="new-password"
+                  secureTextEntry={true}
                 />
 
                 <Button
-                  variant="primary"
-                  size="lg"
+                  title={loading ? 'Creating Account...' : 'Create Account'}
                   onPress={handleRegister}
                   loading={loading}
-                  style={styles.registerButton}
-                >
-                  {loading ? 'Creating Account...' : 'Create Account'}
-                </Button>
+                />
 
                 <View style={styles.footer}>
-                  <Typography variant="body" color="textSecondary">
+                  <Typography variant="p" color="muted">
                     Already have an account?{' '}
                   </Typography>
-                  <Typography variant="body" color="primary">
+                  <Typography variant="p" color="primary">
                     Sign in here
                   </Typography>
                 </View>
@@ -205,9 +196,6 @@ const styles = StyleSheet.create({
   },
   nameInput: {
     flex: 1,
-  },
-  registerButton: {
-    marginTop: 16,
   },
   footer: {
     flexDirection: 'row',

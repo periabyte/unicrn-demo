@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import './src/lib/unistyles';
 import { 
   Typography, 
   Button, 
@@ -10,8 +9,8 @@ import {
   Badge, 
   Avatar, 
   Switch 
-} from './src/components';
-import { useDisclose } from './src/hooks/useDisclose';
+} from '../components/ui';
+import { useDisclose } from '../components/hooks';
 
 export default function ComponentsScreen() {
   const [inputValue, setInputValue] = useState('');
@@ -35,142 +34,149 @@ export default function ComponentsScreen() {
       >
         <View style={styles.content}>
           <View style={styles.header}>
-            <Typography variant="h1" color="text">
+            <Typography variant="h1" color="foreground">
               UNICRN Components
             </Typography>
-            <Typography variant="body" color="textSecondary" style={styles.subtitle}>
+            <Typography variant="p" color="muted" style={styles.subtitle}>
               Explore all available UI components
             </Typography>
           </View>
 
           {/* Typography Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+            <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
               Typography
             </Typography>
             <View style={styles.componentGroup}>
-              <Typography variant="h1" color="text">Heading 1</Typography>
-              <Typography variant="h2" color="text">Heading 2</Typography>
-              <Typography variant="h3" color="text">Heading 3</Typography>
-              <Typography variant="body" color="text">Body text example</Typography>
-              <Typography variant="caption" color="textSecondary">Caption text</Typography>
+              <Typography variant="h1" color="foreground">Heading 1</Typography>
+              <Typography variant="h2" color="foreground">Heading 2</Typography>
+              <Typography variant="h3" color="foreground">Heading 3</Typography>
+              <Typography variant="p" color="foreground">Body text example</Typography>
+              <Typography variant="small" color="muted">Caption text</Typography>
             </View>
           </Card>
+          </View>
 
           {/* Button Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+            <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
               Buttons
             </Typography>
             <View style={styles.componentGroup}>
               <View style={styles.buttonRow}>
-                <Button variant="primary" size="sm">Small</Button>
-                <Button variant="primary" size="md">Medium</Button>
-                <Button variant="primary" size="lg">Large</Button>
+                <Button title="Small" size="sm" />
+                <Button title="Medium" />
+                <Button title="Large" size="lg" />
               </View>
               <View style={styles.buttonRow}>
-                <Button variant="primary">Primary</Button>
-                <Button variant="secondary">Secondary</Button>
+                <Button title="Primary" />
+                <Button title="Secondary" variant="secondary" />
               </View>
               <View style={styles.buttonRow}>
-                <Button variant="outline">Outline</Button>
-                <Button variant="ghost">Ghost</Button>
+                <Button title="Outline" variant="outline" />
+                <Button title="Ghost" variant="ghost" />
               </View>
               <View style={styles.buttonRow}>
-                <Button variant="primary" disabled>Disabled</Button>
+                <Button title="Disabled" disabled />
                 <Button 
-                  variant="primary" 
+                  title={loading ? 'Loading...' : 'Load Demo'}
                   loading={loading}
                   onPress={handleLoadingDemo}
-                >
-                  {loading ? 'Loading...' : 'Load Demo'}
-                </Button>
+                />
               </View>
             </View>
           </Card>
+          </View>
 
           {/* Input Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
-              Inputs
-            </Typography>
-            <View style={styles.componentGroup}>
-              <Input
-                label="Text Input"
-                placeholder="Enter some text"
-                value={inputValue}
-                onChangeText={setInputValue}
-              />
-              <Input
-                label="Email Input"
-                placeholder="Enter your email"
-                type="email"
-              />
-              <Input
-                label="Password Input"
-                placeholder="Enter password"
-                type="password"
-              />
-              <Input
-                label="Input with Error"
-                placeholder="This has an error"
-                error="This field is required"
-              />
-            </View>
-          </Card>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+              <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
+                Inputs
+              </Typography>
+              <View style={styles.componentGroup}>
+                <Input
+                  label="Text Input"
+                  placeholder="Enter some text"
+                  value={inputValue}
+                  onChangeText={setInputValue}
+                />
+                <Input
+                  label="Email Input"
+                  placeholder="Enter your email"
+                />
+                <Input
+                  label="Password Input"
+                  placeholder="Enter password"
+                  secureTextEntry={true}
+                />
+                <Input
+                  label="Input with Error"
+                  placeholder="This has an error"
+                  error="This field is required"
+                />
+              </View>
+            </Card>
+          </View>
 
           {/* Badge Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+            <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
               Badges
             </Typography>
             <View style={styles.componentGroup}>
               <View style={styles.badgeRow}>
-                <Badge variant="primary" size="sm">Small</Badge>
-                <Badge variant="primary" size="md">Medium</Badge>
-                <Badge variant="primary" size="lg">Large</Badge>
+                <Badge theme="primary" size="sm">Small</Badge>
+                <Badge theme="primary" size="md">Medium</Badge>
+                <Badge theme="primary" size="lg">Large</Badge>
               </View>
               <View style={styles.badgeRow}>
-                <Badge variant="primary">Primary</Badge>
-                <Badge variant="secondary">Secondary</Badge>
-                <Badge variant="success">Success</Badge>
+                <Badge theme="primary">Primary</Badge>
+                <Badge theme="secondary">Secondary</Badge>
+                <Badge theme="destructive">Destructive</Badge>
               </View>
               <View style={styles.badgeRow}>
-                <Badge variant="warning">Warning</Badge>
-                <Badge variant="error">Error</Badge>
+                <Badge theme="primary" variant="outline">Outline</Badge>
               </View>
             </View>
           </Card>
+          </View>
 
           {/* Avatar Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
-              Avatars
-            </Typography>
-            <View style={styles.componentGroup}>
-              <View style={styles.avatarRow}>
-                <Avatar size="sm" />
-                <Avatar size="md" />
-                <Avatar size="lg" />
-                <Avatar size="xl" />
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+              <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
+                Avatars
+              </Typography>
+              <View style={styles.componentGroup}>
+                <View style={styles.avatarRow}>
+                  <Avatar size="sm" />
+                  <Avatar size="md" />
+                  <Avatar size="lg" />
+                  <Avatar size="xl" />
+                </View>
+                <View style={styles.avatarRow}>
+                  <Avatar size="sm" fallback="JS" />
+                  <Avatar size="md" fallback="JD" />
+                  <Avatar size="lg" fallback="AB" />
+                  <Avatar size="xl" fallback="CD" />
+                </View>
               </View>
-              <View style={styles.avatarRow}>
-                <Avatar size="sm" initials="JS" />
-                <Avatar size="md" initials="JD" />
-                <Avatar size="lg" initials="AB" />
-                <Avatar size="xl" initials="CD" />
-              </View>
-            </View>
-          </Card>
+            </Card>
+          </View>
 
           {/* Switch Section */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+            <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
               Switches
             </Typography>
             <View style={styles.componentGroup}>
               <View style={styles.switchRow}>
-                <Typography variant="body" color="text">Small Switch</Typography>
+                <Typography variant="p" color="foreground">Small Switch</Typography>
                 <Switch
                   size="sm"
                   value={switchValue}
@@ -178,7 +184,7 @@ export default function ComponentsScreen() {
                 />
               </View>
               <View style={styles.switchRow}>
-                <Typography variant="body" color="text">Medium Switch</Typography>
+                <Typography variant="p" color="foreground">Medium Switch</Typography>
                 <Switch
                   size="md"
                   value={switchValue}
@@ -186,15 +192,7 @@ export default function ComponentsScreen() {
                 />
               </View>
               <View style={styles.switchRow}>
-                <Typography variant="body" color="text">Large Switch</Typography>
-                <Switch
-                  size="lg"
-                  value={switchValue}
-                  onValueChange={setSwitchValue}
-                />
-              </View>
-              <View style={styles.switchRow}>
-                <Typography variant="body" color="text">Disabled Switch</Typography>
+                <Typography variant="p" color="foreground">Disabled Switch</Typography>
                 <Switch
                   value={false}
                   onValueChange={() => {}}
@@ -203,26 +201,30 @@ export default function ComponentsScreen() {
               </View>
             </View>
           </Card>
+          </View>
 
           {/* useDisclose Hook Demo */}
-          <Card variant="elevated" padding="lg" style={styles.section}>
-            <Typography variant="h2" color="text" style={styles.sectionTitle}>
-              useDisclose Hook
-            </Typography>
-            <View style={styles.componentGroup}>
-              <Button variant="primary" onPress={disclosure.onToggle}>
-                {disclosure.isOpen ? 'Hide Content' : 'Show Content'}
-              </Button>
-              {disclosure.isOpen && (
-                <Card variant="outlined" padding="md" style={styles.disclosureContent}>
-                  <Typography variant="body" color="text">
-                    This content is controlled by the useDisclose hook! 
-                    It provides toggle, open, and close functions for managing visibility state.
-                  </Typography>
-                </Card>
-              )}
-            </View>
-          </Card>
+          <View style={styles.cardSection}>
+            <Card padding="lg">
+              <Typography variant="h2" color="foreground" style={styles.sectionTitle}>
+                useDisclose Hook
+              </Typography>
+              <View style={styles.componentGroup}>
+                <Button 
+                  title={disclosure.isOpen ? 'Hide Content' : 'Show Content'}
+                  onPress={disclosure.toggle}
+                />
+                {disclosure.isOpen && (
+                  <Card variant="elevated" padding="md">
+                    <Typography variant="p" color="foreground">
+                      This content is controlled by the useDisclose hook! 
+                      It provides toggle, open, and close functions for managing visibility state.
+                    </Typography>
+                  </Card>
+                )}
+              </View>
+            </Card>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -251,14 +253,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
     textAlign: 'center',
   },
-  section: {
-    marginBottom: 24,
-  },
   sectionTitle: {
     marginBottom: 24,
   },
   componentGroup: {
     gap: 16,
+  },
+  cardSection: {
+    marginBottom: 24,
   },
   buttonRow: {
     flexDirection: 'row',
@@ -281,8 +283,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 8,
-  },
-  disclosureContent: {
-    marginTop: 16,
   },
 });
